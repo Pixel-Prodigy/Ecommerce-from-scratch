@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { inter } from "@/app/components/ui/fonts";
+import Link from "next/link";
+import { Heart, ShoppingCart, Search, User } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +26,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} bg-[#f6f0f0] ${geistMono.variable} antialiased `}
       >
-        {children}
+        <div className="max-w-[1280px]  mx-auto relative">
+          <header className="w-full flex items-center px-16 text-black justify-end absolute top-0  pt-7">
+            <div className="absolute left-1/2 -translate-x-1/2 flex gap-10 text-md font-semibold">
+              <Link href="/">Home</Link>
+              <Link href="/shop">Shop</Link>
+              <Link href="/about">About</Link>
+              <Link href="/contact">Contact</Link>
+            </div>
+            <div className={` items-center gap-8 hidden md:flex`}>
+              <Search />
+              <ShoppingCart />
+              <Heart />
+              <User />
+            </div>
+          </header>
+
+          {children}
+        </div>
       </body>
     </html>
   );
